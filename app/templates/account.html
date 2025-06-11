@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="center-text">
+    <h2>Мои заказы</h2>
+
+    {% if orders %}
+        {% for order in orders %}
+            <div style="border: 1px solid #ccc; margin: 10px auto; padding: 10px; width: 300px;">
+                <p><strong>Заказ #{{ order.id }}</strong> от {{ order.created_at|date:"d.m.Y H:i" }}</p>
+                <ul style="text-align: left;">
+                    {% for item in order.items.all %}
+                        <li>{{ item.product.name }} — {{ item.quantity }} шт. — {{ item.subtotal }} ₽</li>
+                    {% endfor %}
+                </ul>
+                <p><strong>Итого: {{ order.total }} ₽</strong></p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>У вас ещё нет заказов.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="center-text">Продукты</h2>
+<div class="card-grid">
+    {% for product in products %}
+        <div class="card center-text">
+            <img src="{{ product.photo.url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p><strong>{{ product.price }} ₽</strong></p>
+            <p><em>Фермер: {{ product.farmer.name }}</em></p>
+            <form action="{% url 'add_to_cart' product.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Добавить в корзину</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

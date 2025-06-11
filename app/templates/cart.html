@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="center-text">Ваша корзина</h2>
+
+{% if items %}
+<div class="card-grid">
+    {% for item in items %}
+        <div class="card center-text">
+            <img src="{{ item.product.photo.url }}" alt="{{ item.product.name }}">
+            <h3>{{ item.product.name }}</h3>
+            <p>{{ item.product.description }}</p>
+            <p><strong>{{ item.product.price }} ₽</strong></p>
+            <p><em>Фермер: {{ item.product.farmer.name }}</em></p>
+            <p>
+                Кол-во:
+                <a href="{% url 'decrease_quantity' item.product.id %}">➖</a>
+                <strong>{{ item.quantity }}</strong>
+                <a href="{% url 'increase_quantity' item.product.id %}">➕</a>
+            </p>
+            <p>Сумма: <strong>{{ item.subtotal }} ₽</strong></p>
+            <form action="{% url 'remove_from_cart' item.product.id %}" method="post" style="margin-top: 10px;">
+                {% csrf_token %}
+                <button type="submit" style="background-color: #f44336; color: white; border: none; padding: 6px 10px;">Удалить</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="center-text" style="margin-top: 20px;">
+    <a href="{% url 'clear_cart' %}">
+        <button style="padding: 8px 15px; background-color: #757575; color: white; border: none; margin-right: 10px;">
+            Очистить корзину
+        </button>
+    </a>
+
+    <a href="{% url 'checkout' %}">
+        <button style="padding: 8px 15px; background-color: #4CAF50; color: white; border: none;">
+            Оформить заказ
+        </button>
+    </a>
+</div>
+
+<p class="center-text" style="margin-top: 20px; font-size: 18px;">
+    <strong>Итого: {{ total }} ₽</strong>
+</p>
+{% else %}
+<p class="center-text">Корзина пуста.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Своя ферма</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Своя ферма</h1>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="/farmers/">Фермеры</a>
+            <a href="/products/">Продукты</a>
+            <a href="/contact/">Контакты</a>
+            <a href="/cart/">🛒 Корзина</a>
+
+            {% if user.is_authenticated %}
+                <a href="/account/">👤 Кабинет</a>
+                <a href="/logout/">Выйти</a>
+            {% else %}
+                <a href="{% url 'register' %}">Регистрация</a>
+                <a href="/login/">Войти</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Контент страниц будет сюда вставляться -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 Своя ферма. Все права защищены.</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
