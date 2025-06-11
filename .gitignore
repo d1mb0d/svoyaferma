@@ -1,16 +1,36 @@
 # Python
 __pycache__/
 *.py[cod]
+*.so
+*.pyd
 *.pyo
+*.egg
+*.egg-info/
+dist/
+build/
 
-# Django
-db.sqlite3
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# Django stuff
 *.log
+db.sqlite3
+db.sqlite3-journal
+staticfiles/
 
-# VSCode / PyCharm
+# VS Code / PyCharm
 .vscode/
 .idea/
 
-# System
-*.DS_Store
+# OS
+.DS_Store
 Thumbs.db
+
+# dotenv / secret configs
+.env
+*.env
+

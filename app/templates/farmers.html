@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <h2 class="center-text">Наши фермеры</h2>
 <div class="card-grid">
     {% for farmer in farmers %}
         <div class="card center-text">
-            <img src="{{ farmer.photo.url }}" alt="{{ farmer.name }}">
+            <img src="{% static farmer.image_path %}" alt="{{ farmer.name }}" class="farmer-img">
             <h3>{{ farmer.name }}</h3>
             <p>{{ farmer.description }}</p>
         </div>

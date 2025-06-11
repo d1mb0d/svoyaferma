@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: svoya-ferma
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn svoyaferma.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: svoyaferma.settings
+      - key: PYTHON_VERSION
+        value: 3.8
+    staticPublishPath: staticfiles
